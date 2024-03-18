@@ -9,7 +9,7 @@ export default async function handle(
   const jets: Jets = req.body.jets;
   const fn: string = req.body.comparison;
   const prompt = generatePrompt(jets, fn);
-  const apiKey = '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';
+  const apiKey = '';
   const url = 'https://api.openai.com/v1/chat/completions';
 
   const body = JSON.stringify({
