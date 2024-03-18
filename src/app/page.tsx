@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { HTMLAttributes, HTMLProps } from "react";
+import React, { HTMLAttributes, HTMLProps, useEffect } from "react";
 import fakedata from "../mock_data.json";
 import { 
   useReactTable,
@@ -10,20 +10,15 @@ import {
   getSortedRowModel, 
   createColumnHelper
 } from "@tanstack/react-table";
+import { Jet, Jets } from "../../lib/types";
 
-type Jet = {
-  id: number;
-  name: string;
-  wingspan: number;
-  engines: number;
-  year: number;
-};
-
+// component for checkbox for each row
 function IndeterminateCheckbox({
   indeterminate,
   className = '',
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  // use ref to access checkbox input DOM, and update state through table fns
   const ref = React.useRef<HTMLInputElement>(null!)
 
   React.useEffect(() => {
@@ -43,11 +38,19 @@ function IndeterminateCheckbox({
 }
 
 export default function Home() {
-  const data: Jet[] = fakedata;
+  const [data, setData] = React.useState<Jet[]>([]);
   const columnHelper = createColumnHelper<Jet>();
   const [rowSelection, setRowSelection] = React.useState({});
 
+  useEffect(() => {
+    fetch('/api/jets')
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
+
+  // set format for each column, including title and how to access data
   const columns = [
+    // creates checkbox for each row, enabling row selection via table fns
     columnHelper.display( {
       id: 'selection',
       cell: ({ row }) => (
@@ -87,6 +90,7 @@ export default function Home() {
   ]
 
 
+  // set columns, data, and properties of table (sorting, row selection)
   const table = useReactTable({
     columns: columns,
     data: data,
@@ -109,9 +113,11 @@ export default function Home() {
       <div>testing 1 2 3</div>
       <table>
         <thead>
+          {/* display headers. currently only 1 header group */}
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => {
+                // check if column is sortable. if so, allow clicking to toggle sort desc -> asc -> as is 
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
                     {header.isPlaceholder ? null : (
@@ -132,6 +138,7 @@ export default function Home() {
                             : undefined
                         }
                       >
+                        {/* render column with custom markup via flexRender */}
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
