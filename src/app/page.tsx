@@ -146,7 +146,7 @@ export default function Home() {
   return (
     <main className='flex min-h-screen flex-col items-center justify-center gap-32 p-24 bg-gray-50'>
       <h1 className='text-4xl font-bold'>
-        Jet Comparison Tool
+        AI-Powered Jet Comparison Tool
       </h1>
       <div>
         <h3 className='text-xl font-medium'>Top 10 Charter Jets</h3>

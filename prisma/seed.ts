@@ -1,21 +1,19 @@
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { jets } from './seeds/jets';
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// async function seed() {
-//     await prisma.user.create({
-//         data: {
-//             name: 'John Doe',
-//             email: 'john.doe@example.com',
-//         },
-//     });
-// }
+async function seed() {
+  await prisma.jets.createMany({
+    data: jets,
+  });
+}
 
-// seed()
-//   .catch((error) => {
-//     console.error(error);
-//     process.exit(1);
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect();
-//   });
+seed()
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

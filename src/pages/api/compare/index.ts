@@ -12,7 +12,7 @@ export default async function handle(
   console.log("prompt", prompt);
   // remember to add your apiKey here. Ideally in environment variable, but 
   // this makes it easy to set up the project
-  const apiKey = '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';
+  const apiKey = 'YOUR_API_KEY';
   const url = 'https://api.openai.com/v1/chat/completions';
 
   const body = JSON.stringify({

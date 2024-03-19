@@ -7,7 +7,7 @@ export default async function handle(
   res: NextApiResponse
 ) {
   try {
-    const result = await prisma.post.findMany({});
+    const result = await prisma.jets.findMany({});
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
