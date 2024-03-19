@@ -7,3 +7,11 @@ export type Jet = {
 };
 
 export interface Jets extends Array<Jet> { }
+
+export type Rank = {
+  rank: number;
+  name: string;
+  value: string;
+}
+
+export interface Rankings extends Array<Rank> {}

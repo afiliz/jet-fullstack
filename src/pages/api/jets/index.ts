@@ -1,7 +1,7 @@
 import prisma from '../../../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Jet, Jets } from "../../../../lib/types";
 
+// get all jets as json array from prisma
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse

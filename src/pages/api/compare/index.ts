@@ -1,19 +1,22 @@
-import prisma from '../../../../lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Jet, Jets } from "../../../../lib/types";
+import { Jets } from "../../../../lib/types";
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // get selected jets and comparison function, then generate prompt
   const jets: Jets = req.body.jets;
   const fn: string = req.body.comparison;
   const prompt = generatePrompt(jets, fn);
-  const apiKey = '';
+  console.log("prompt", prompt);
+  // remember to add your apiKey here. Ideally in environment variable, but 
+  // this makes it easy to set up the project
+  const apiKey = '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';
   const url = 'https://api.openai.com/v1/chat/completions';
 
   const body = JSON.stringify({
-    prompt,
+    messages: [{ role: 'user', content: prompt }],
     model: 'gpt-3.5-turbo',
     stream: false
   });
@@ -27,17 +30,21 @@ export default async function handle(
       },
       body
     });
-    const data = await response.json();
+    const data = await response.json();    
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ error: err });
   } 
 }
 
+// generates ChatGPT prompt based on selected jets and comparison function
 function generatePrompt(jets: Jets, fn: string) {
   const jetNames = jets.map(jet => jet.name).join(', ');
 
-  return `Given the following jets: ${jetNames}, 
-    rank each by their ${fn}. provide the answer as an array of json objects, 
-    with each object containing "rank", "name", and "value" (being ${fn}) for each jet`;
+  return `As an expert in knowledge of jets, given the following jets: ${jetNames}, 
+    rank each by their ${fn}. Provide the answer as an array of json objects, 
+    with each object containing "rank", "name", and "value" (being ${fn}) for each jet. 
+    Correctly sort the objects by their value in descending order.
+    Include the measurement unit in the value field after sorting. `;
+    
 }
