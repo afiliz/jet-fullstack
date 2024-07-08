@@ -65,21 +65,5 @@ There are 2 API routes, /compare and /jets. /jets is a GET request for retrievin
 
 Testing
 
-This app was tested on Chrome, Firefox, and Safari web browsers, with all features working for each browser (Safari renders some UI differently though). Each aspect of the app was thoroughly manually tested as development progressed.
+This app was tested on Chrome, Firefox, and Safari desktop web browsers, with all features working for each browser (Safari renders some UI differently though). Each aspect of the app was thoroughly manually tested as development progressed.
 
-Known issues:
-- Sometimes ChatGPT won't return a JSON object correctly formatted, and an error will appear in the bottom right. Try rerunning the comparison tool by clicking the compare button.
-- The main page is responsive for desktop/laptop screens and tablets, but is not responsive for mobile devices
-
-## Future Improvements
-
-Ideally I'd want to implement these features as well to the comparison app:
-- Third section where AI would go into detail on the differences between selected jets, and rationalize why it ranked jets as it did
-- Select all checkbox in the top 10 table
-- Loading indicator for showing that ChatGPT is generating results after clicking the compare button
-- Research into improvements in prompt engineering for more accurate ranking results
-- Further work on Tailwind CSS code for mobile responsive interface
-- Unit tests for the backend
-
-## Notes for the reviewer
-Thank you for considering me for the Full Stack Developer position at Jet.AI. I hope this project serves to show my skills and ability to develop quality Full Stack projects. If you have any questions about the project, please don't hesitate to let me know.
