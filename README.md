@@ -1,4 +1,4 @@
-This is a project I built for a client to help Jet enthusiast customers rank and compare different features of commercial jets. I used the following tech stack for the project:
+This is a project I built for a client to help Jet enthusiast customers rank and compare different features of commercial jets using ChatGPT. I used the following tech stack for the project:
 
 Frontend:
 - React
